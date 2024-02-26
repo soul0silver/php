@@ -25,3 +25,12 @@ Route::get('/employee',
 Route::get('/dashboard',
     [\App\Http\Controllers\Api\AbsentController::class,'getDashBoard']
 );
+Route::get('/read/{uid}',
+    [\App\Http\Controllers\Api\AbsentController::class,'read']
+);
+Route::get('/edit/{uid}',
+    [\App\Http\Controllers\Api\AbsentController::class,'canedit']
+);
+Route::get('/create/{uid}',
+    [\App\Http\Controllers\Api\AbsentController::class,'create']
+);

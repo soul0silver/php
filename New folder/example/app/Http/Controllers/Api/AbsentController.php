@@ -6,16 +6,24 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Absent;
 use App\Models\Employee;
+use App\Models\User;
 use App\Models\Worksday;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 
 class AbsentController extends Controller
 {
+
+    public function login(Request $request):JsonResponse
+    {
+        $user=User::query()->where('name')->get();
+        return response()->json($user->id);
+    }
     public function index($eid): JsonResponse
     {
         $absent = Absent::query()->where('eid',(int)$eid)->orderBy('id')->paginate(10);
@@ -39,6 +47,9 @@ class AbsentController extends Controller
 
     public function store(Request $request): \Illuminate\Http\JsonResponse
     {
+        $uid= $request->input('uid');
+
+        if (Gate::allows('add-absent',$uid))
         Absent::query()->create(
             [
                 'eid'=>$request->input('eid'),
@@ -99,4 +110,27 @@ class AbsentController extends Controller
             'data'=>$workday]);
     }
 
+    public function read($uid):JsonResponse
+    {
+        $res='not';
+        if(Gate::check('read-role',1))
+           $res="read";
+        return response()->json($res);
+    }
+    public function canedit($uid):JsonResponse
+    {
+        $res='';
+        if(Gate::allows('edit',$uid))
+            $res="edit";
+        else $res='not';
+        return response()->json($res);
+    }
+    public function create($uid):JsonResponse
+    {
+        $res='';
+        if(Gate::allows('create',$uid))
+            $res="read";
+        else $res='not';
+        return response()->json($res);
+    }
 }
