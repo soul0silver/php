@@ -1,0 +1,10 @@
+<div class="flex flex-col items-center w-full">
+  <div class="w-[300px]" *ngFor="let post of data;let i=index">
+    <p class="font-semibold">Title: {{post.name}}</p>
+    <p>Content:
+      <br>
+      {{post.content}}
+    </p>
+    <button class="bg-black text-white rounded-lg p-3" type="button" (click)="setData(post)">Edit</button>
+  </div>
+</div>

@@ -22,6 +22,6 @@ Route::middleware('validate_token')->group(function (){
     Route::post('register',[\App\Http\Controllers\Api\EmpController::class,'register']);
     Route::post('login',[\App\Http\Controllers\Api\EmpController::class,'login']);
     Route::post('post/create',[\App\Http\Controllers\Api\EmpController::class,'createPost']);
-    Route::put('post/update',[\App\Http\Controllers\Api\EmpController::class,'index']);
-    Route::get('post/{uid}',[\App\Http\Controllers\Api\EmpController::class,'getList']);
+    Route::put('post/update',[\App\Http\Controllers\Api\EmpController::class,'update']);
+    Route::get('post/home/{uid}',[\App\Http\Controllers\Api\EmpController::class,'getList']);
 });

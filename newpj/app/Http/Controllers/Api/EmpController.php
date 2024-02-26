@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 
 class EmpController extends \Illuminate\Routing\Controller
 {
-    public function index(Request $request):JsonResponse{
-        $post= Post::query()->find($request->get('id'));
+    public function update(Request $request):JsonResponse{
+        $post= Post::query()->find($request->id);
         $post->setAttribute('name',$request->get('name'));
         $post->setAttribute('content',$request->get('content'));
         return response()->json(['message' => 'Post updated successfully']);
