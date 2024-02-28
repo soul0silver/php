@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 
 class EmpController extends \Illuminate\Routing\Controller
 {
-    public function update(Request $request):JsonResponse{
+    public function editPost(Request $request):JsonResponse{
         $post= Post::query()->find($request->id);
         $post->setAttribute('name',$request->get('name'));
         $post->setAttribute('content',$request->get('content'));
         return response()->json(['message' => 'Post updated successfully']);
     }
     public function getList(Request $request,int $uid):JsonResponse{
-        $post= Post::query()->where('uid',$uid)->get();
+        $post= Post::query()->get();
 
         return response()->json(['data' => $post]);
     }

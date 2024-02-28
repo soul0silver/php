@@ -20,6 +20,10 @@ export class UserPageComponent {
       if (res.status === 200) {
         localStorage.setItem('info', JSON.stringify(res.data[0]));
         this.router.navigate(['']);
+      } else {
+        console.log(res);
+        
+        alert(res.message);
       }
     });
   }

@@ -42,6 +42,7 @@ export class PostComponent implements OnInit {
   }
 
   create() {
+    console.log(this.postInfo.value)
     if (location.href.includes('edit')) {
       this.post.edit(this.postInfo.value).then((res: any) => {
         console.log(res);

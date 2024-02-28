@@ -29,7 +29,7 @@ export class PostServiceService {
   }
   async edit(data:any) {
     let res = await firstValueFrom(
-      this.http.put('http://127.0.0.1:8000/api/post/update', data)
+      this.http.post('http://127.0.0.1:8000/api/post/edit', data)
     );
     return res;
   }
